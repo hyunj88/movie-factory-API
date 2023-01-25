@@ -18,7 +18,8 @@ const movieSchema = new Schema(
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
-		}
+		},
+		comments: [commentSchema]
 	},
 	{ timestamps: true }
 )

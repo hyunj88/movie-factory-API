@@ -46,7 +46,27 @@ router.get('/seed', (req, res) => {
         { title: 'About Time', genre: 'Romance/Comedy', 
         director: 'Richard Curtis', date: 2013,
         description: 'At the age of 21, Tim discovers he can travel in time and change what happens and has happened in his own life. His decision to make his world a better place by getting a girlfriend turns out not to be as easy as you might think.', 
-        favorite: true }
+        favorite: true },
+		{ title: 'Wedding Crashers', genre: 'Comedy', 
+        director: 'David Dobkin', date: 2005,
+        description: 'John Beckwith and Jeremy Grey, a pair of committed womanizers who sneak into weddings to take advantage of the romantic tinge in the air, find themselves at odds with one another when John meets and falls for Claire Cleary.', 
+        favorite: false },
+		{ title: 'No Country for Old Men', genre: 'Thriller/Drama', 
+        director: 'Ethan Coen, Joel Coen', date: 2007,
+        description: 'Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more than two million dollars in cash near the Rio Grande.',
+		favorite: true },
+		{ title: 'Looper', genre: 'Sci-fi/Action', 
+        director: 'Rian Johnson', date: 2012,
+        description: 'In 2074, when the mob wants to get rid of someone, the target is sent into the past, where a hired gun awaits - someone like Joe - who one day learns the mob wants to close the loop by sending back Joes future self for assassination.',
+		favorite: true },
+		{ title: 'Rain Man', genre: 'Drama', 
+        director: 'Barry Levinson', date: 1988,
+        description: 'After a selfish L.A. yuppie learns his estranged father left a fortune to an autistic-savant brother in Ohio that he didnt know existed, he absconds with his brother and sets out across the country, hoping to gain a larger inheritance.',
+		favorite: true },
+		{ title: 'Menento', genre: 'Thriller', 
+        director: 'Christopher Nolan', date: 2000,
+        description: 'Memento chronicles two separate stories of Leonard, an ex-insurance investigator who can no longer build new memories, as he attempts to find the murderer of his wife, which is the last thing he remembers. One story line moves forward in time while the other tells the story backwards revealing more each time.',
+		favorite: true },
     ]
     Movie.deleteMany({})
         .then(() => {
@@ -59,13 +79,15 @@ router.get('/seed', (req, res) => {
 })
 
 // INDEX route 
-// Read -> finds and displays all fruits
+// Read -> finds and displays all movies
 router.get('/', (req, res) => {
-    // find all the fruits
+	const { username, loggedIn, userId } = req.session
     Movie.find({})
-        // send json if successful
-        .then(movies => { res.json({ movies: movies })})
-        // catch errors if they occur
+		.populate('owner', 'username')
+        .populate('comments.commentator', '-password')
+        .then(movies => { 
+			res.json({ movies: movies })})
+			// res.render('cars/index', { cars, username, loggedIn, userId })
         .catch(err => console.log('The following error occurred: \n', err))
 })
 
@@ -73,11 +95,15 @@ router.get('/', (req, res) => {
 router.get('/mine', (req, res) => {
     // find cars by ownership, using the req.session info
     Movie.find({ owner: req.session.userId })
+		.populate('owner', 'username')
+        .populate('comments.commentator', '-password')
 		.then(movies => {
-			res.render('movies/index', { movies, ...req.session })
+			res.status(200).json({ movies: movies })
+			// res.render('movies/index', { movies, ...req.session })
 		})
 		.catch(error => {
-			res.redirect(`/error?error=${error}`)
+			res.status(400).json(err)
+			// res.redirect(`/error?error=${error}`)
 		})
 })
 
@@ -119,17 +145,18 @@ router.put('/:id', (req, res) => {
 	Movie.findById(id)
     .then(movie => {
         if (movie.owner == req.session.userId) {
-            // update and save the movie
-            return movie.updateOne(req.body)
+			return movie.updateOne(req.body)
         } else {
-            res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20movie`)
+			res.sendStatus(401)
+            // res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20movie`)
         }
     })
     .then(() => {
         res.redirect(`/movie/mine`)
     })
     .catch(err => {
-        res.redirect(`/error?error=${err}`)
+		res.status(400).json(err)
+        // res.redirect(`/error?error=${err}`)
     })
 })
 
@@ -137,11 +164,15 @@ router.put('/:id', (req, res) => {
 router.get('/:id', (req, res) => {
 	const id = req.params.id
 	Movie.findById(id)
+		.populate('comments.commenator', 'username')
 		.then(movie => {
-			res.render('movies/show.liquid', {movie, ...req.session})
+			res.json({ movie: movie })
+			// res.render('movies/show.liquid', {movie, ...req.session})
 		})
 		.catch((error) => {
-			res.redirect(`/error?error=${error}`)
+			console.log(err)
+            res.status(404).json(err)
+			// res.redirect(`/error?error=${error}`)
 		})
 })
 
@@ -153,7 +184,8 @@ router.delete('/:id', (req, res) => {
 			if (movie.owner == req.session.userId) {
 				return movie.deleteOne()
 			} else {
-				res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20movie`)
+				res.sendStatus(401)
+				// res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20movie`)
 			}
 		})
 		.then(() => {
@@ -161,7 +193,8 @@ router.delete('/:id', (req, res) => {
 		})
 			.catch(err => {
 				console.log(err)
-				res.redirect(`/error?error=${err}`)
+				res.status(400).json(err)
+				// res.redirect(`/error?error=${err}`)
 			})
 	})
 

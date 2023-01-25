@@ -5,6 +5,7 @@ require("dotenv").config() // make env variables available
 const express = require("express")
 const middleware = require('./utils/middleware')
 const MovieRouter = require('./controllers/movieControllers')
+const CommentRouter = require('./controllers/commentControllers')
 const UserRouter = require('./controllers/userControllers')
 const User = require("./models/user")
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
@@ -21,8 +22,9 @@ middleware(app)
 //    Routes      //
 ////////////////////
 
-app.use('/auth', UserRouter)
 app.use('/movies', MovieRouter)
+app.use('/comments', CommentRouter)
+app.use('/auth', UserRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session
