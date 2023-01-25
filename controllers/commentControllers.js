@@ -19,17 +19,17 @@ router.post('/:movieId', (req, res) => {
                 return movie.save()
             })
             .then(movie => {
-                res.status(201).json({ movie: movie })
-                // res.redirect(`/movies/${movie.id}`)
+                // res.status(201).json({ movie: movie })
+                res.redirect(`/movies/${movie.id}`)
             })
             .catch(err => {
                 console.log(err)
-                res.status(400).json(err)
-                // res.redirect(`/error?error=${err}`)
+                // res.status(400).json(err)
+                res.redirect(`/error?error=${err}`)
             })
     } else {
-        res.sendStatus(401)
-        // res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20movie`)
+        // res.sendStatus(401)
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20movie`)
     }
 })
 
@@ -44,8 +44,8 @@ router.delete('/delete/:movieId/:commId', (req, res) => {
                 if (theComment.commentator == req.session.userId) {
                     theComment.remove()
                     movie.save()
-                    res.sendStatus(204)
-                    // res.redirect(`/movies/${movie.id}`)
+                    // res.sendStatus(204)
+                    res.redirect(`/movies/${movie.id}`)
                 } else {
                     res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
                 }

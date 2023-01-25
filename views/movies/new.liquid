@@ -1,37 +1,52 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 <div class="container-sm">
-    <form action="/examples" method="POST">
+    <form action="/movies" method="POST">
         <fieldset>
-            <legend>Create New Example</legend>
+            <legend>Add Movie</legend>
             <label class="form-label">Title: </label>
             <input 
                 type="text" 
                 name="title" 
-                placeholder="enter example title"
+                placeholder="enter movie title"
                 class="form-control"
             >
-            <label class="form-label">Body:</label>
+            <label class="form-label">Genre:</label>
             <input 
                 type="text" 
-                name="body" 
-                placeholder="enter example body" 
+                name="genre" 
+                placeholder="enter movie genre" 
                 class="form-control"
             >
-            <label class="form-label">Amount:</label>
+            <label class="form-label">Director:</label>
+            <input 
+                type="text" 
+                name="director" 
+                placeholder="enter movie director"
+                class="form-control"
+            >
+            <label class="form-label">Release Date:</label>
             <input 
                 type="number" 
-                name="amount" 
+                name="date" 
+                placeholder="enter year the movie was release"
                 class="form-control"
             >
-            <label class="form-label">Ready:</label>
+            <label class="form-label">Synopis:</label>
+            <input 
+                type="text" 
+                name="description" 
+                placeholder="enter a brief summary of the movie..."
+                class="form-control"
+            >
+            <label class="form-label">Favorite:</label>
             <input 
                 type="checkbox" 
-                name="ready" 
+                name="favorite" 
                 class="form-check-input"
             >
         </fieldset>
-        <input type="submit" value="Create New Example" class="btn btn-success">
+        <input type="submit" value="Add New Movie" class="btn btn-warning">
     </form>
 </div>
 {% endblock %}

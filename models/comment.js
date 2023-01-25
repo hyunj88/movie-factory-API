@@ -10,7 +10,7 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    driver: {
+    commentator: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true

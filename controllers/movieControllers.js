@@ -86,9 +86,13 @@ router.get('/', (req, res) => {
 		.populate('owner', 'username')
         .populate('comments.commentator', '-password')
         .then(movies => { 
-			res.json({ movies: movies })})
-			// res.render('cars/index', { cars, username, loggedIn, userId })
-        .catch(err => console.log('The following error occurred: \n', err))
+			// res.json({ movies: movies })})
+			res.render('movies/index', { movies, username, loggedIn, userId })
+		})
+		.catch(err => {
+            console.log(err)
+            res.redirect(`/error?error=${err}`)
+        })
 })
 
 // index that shows only the user's movies
@@ -98,12 +102,12 @@ router.get('/mine', (req, res) => {
 		.populate('owner', 'username')
         .populate('comments.commentator', '-password')
 		.then(movies => {
-			res.status(200).json({ movies: movies })
-			// res.render('movies/index', { movies, ...req.session })
+			// res.status(200).json({ movies: movies })
+			res.render('movies/index', { movies, ...req.session })
 		})
 		.catch(error => {
-			res.status(400).json(err)
-			// res.redirect(`/error?error=${error}`)
+			// res.status(400).json(err)
+			res.redirect(`/error?error=${error}`)
 		})
 })
 
@@ -147,16 +151,16 @@ router.put('/:id', (req, res) => {
         if (movie.owner == req.session.userId) {
 			return movie.updateOne(req.body)
         } else {
-			res.sendStatus(401)
-            // res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20movie`)
+			// res.sendStatus(401)
+            res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20movie`)
         }
     })
     .then(() => {
         res.redirect(`/movie/mine`)
     })
     .catch(err => {
-		res.status(400).json(err)
-        // res.redirect(`/error?error=${err}`)
+		// res.status(400).json(err)
+        res.redirect(`/error?error=${err}`)
     })
 })
 
@@ -164,15 +168,15 @@ router.put('/:id', (req, res) => {
 router.get('/:id', (req, res) => {
 	const id = req.params.id
 	Movie.findById(id)
-		.populate('comments.commenator', 'username')
+		.populate('comments.commentator', 'username')
 		.then(movie => {
-			res.json({ movie: movie })
-			// res.render('movies/show.liquid', {movie, ...req.session})
+			// res.json({ movie: movie })
+			res.render('movies/show.liquid', {movie, ...req.session})
 		})
 		.catch((error) => {
-			console.log(err)
-            res.status(404).json(err)
-			// res.redirect(`/error?error=${error}`)
+			// console.log(err)
+            // res.status(404).json(err)
+			res.redirect(`/error?error=${error}`)
 		})
 })
 
@@ -184,17 +188,17 @@ router.delete('/:id', (req, res) => {
 			if (movie.owner == req.session.userId) {
 				return movie.deleteOne()
 			} else {
-				res.sendStatus(401)
-				// res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20movie`)
+				// res.sendStatus(401)
+				res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20movie`)
 			}
 		})
 		.then(() => {
 			res.redirect('/movies/mine')
 		})
 			.catch(err => {
-				console.log(err)
-				res.status(400).json(err)
-				// res.redirect(`/error?error=${err}`)
+				// console.log(err)
+				// res.status(400).json(err)
+				res.redirect(`/error?error=${err}`)
 			})
 	})
 
