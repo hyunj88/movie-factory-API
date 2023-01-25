@@ -69,6 +69,101 @@ router.get('/', (req, res) => {
         .catch(err => console.log('The following error occurred: \n', err))
 })
 
+// index that shows only the user's movies
+router.get('/mine', (req, res) => {
+    // find cars by ownership, using the req.session info
+    Movie.find({ owner: req.session.userId })
+		.then(movies => {
+			res.render('movies/index', { movies, ...req.session })
+		})
+		.catch(error => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+// new route -> GET route that renders our page with the form
+router.get('/new', (req, res) => {
+	res.render('movies/new', { ...req.session })
+})
+
+// create -> POST route that actually calls the db and makes a new document
+router.post('/', (req, res) => {
+	req.body.owner = req.session.userId
+	req.body.favorite = req.body.favorite === 'on' ? true : false
+	Movie.create(req.body)
+		.then(movie => {
+			res.redirect(`/movies/${movie.id}`)
+		})
+		.catch(error => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+// edit route -> GET that takes us to the edit form view
+router.get('/edit/:id', (req, res) => {
+	// we need to get the id
+	const movieId = req.params.id
+	Movie.findById(movieId)
+		.then(movie => {
+			res.render('movies/edit', { movie, ...req.session })
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+// update route
+router.put('/:id', (req, res) => {
+	const movieId = req.params.id
+	req.body.favorite = req.body.favorite === 'on' ? true : false
+	Movie.findById(id)
+    .then(movie => {
+        if (movie.owner == req.session.userId) {
+            // update and save the movie
+            return movie.updateOne(req.body)
+        } else {
+            res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20movie`)
+        }
+    })
+    .then(() => {
+        res.redirect(`/movie/mine`)
+    })
+    .catch(err => {
+        res.redirect(`/error?error=${err}`)
+    })
+})
+
+// show route
+router.get('/:id', (req, res) => {
+	const id = req.params.id
+	Movie.findById(id)
+		.then(movie => {
+			res.render('movies/show.liquid', {movie, ...req.session})
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+// delete route
+router.delete('/:id', (req, res) => {
+	const movieId = req.params.id
+	Movie.findByIdAndRemove(movieId)
+		.then(movie => {
+			if (movie.owner == req.session.userId) {
+				return movie.deleteOne()
+			} else {
+				res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20movie`)
+			}
+		})
+		.then(() => {
+			res.redirect('/movies/mine')
+		})
+			.catch(err => {
+				console.log(err)
+				res.redirect(`/error?error=${err}`)
+			})
+	})
 
 // Export the Router
 module.exports = router
