@@ -3,50 +3,52 @@
 <div class="container-sm">
     <form action="/movies" method="POST">
         <fieldset>
-            <legend>Add Movie</legend>
-            <label class="form-label">Title: </label>
+            <legend class="text-warning">Add Movie</legend>
+            <label class="text-light form-label">Title: </label>
             <input 
                 type="text" 
                 name="title" 
                 placeholder="enter movie title"
                 class="form-control"
             >
-            <label class="form-label">Genre:</label>
+            <label class="text-light form-label">Genre:</label>
             <input 
                 type="text" 
                 name="genre" 
                 placeholder="enter movie genre" 
                 class="form-control"
             >
-            <label class="form-label">Director:</label>
+            <label class="text-light form-label">Director:</label>
             <input 
                 type="text" 
                 name="director" 
                 placeholder="enter movie director"
                 class="form-control"
             >
-            <label class="form-label">Release Date:</label>
+            <label class="text-light form-label">Release Date:</label>
             <input 
                 type="number" 
                 name="date" 
-                placeholder="enter year the movie was release"
+                placeholder="enter year the movie was released"
                 class="form-control"
             >
-            <label class="form-label">Synopis:</label>
+            <label class="text-light form-label">Synopis:</label>
+            
             <input 
                 type="text" 
                 name="description" 
                 placeholder="enter a brief summary of the movie..."
                 class="form-control"
             >
-            <label class="form-label">Favorite:</label>
+            <label class="text-light form-label">Favorite:</label>
             <input 
                 type="checkbox" 
                 name="favorite" 
                 class="form-check-input"
             >
+            
         </fieldset>
-        <input type="submit" value="Add New Movie" class="btn btn-warning">
+        <input type="submit" value="Add New Movie" class="btn btn-outline-warning">
     </form>
 </div>
 {% endblock %}

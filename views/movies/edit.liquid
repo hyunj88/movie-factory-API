@@ -1,43 +1,50 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 <div class="container-sm">
-    <form action="/examples?_method=PUT" method="POST">
+    <form action="/movies/{{movie.id}}?_method=PUT" method="POST">
         <fieldset>
-            <legend>Create New Example</legend>
-            <label class="form-label">Title: </label>
+            <legend class="text-warning">Edit Movie</legend>
+            <label class="text-light form-label">Title: </label>
             <input 
                 type="text" 
                 name="title" 
-                placeholder="{{ example.title }}"
-                value="{{ example.title }}"
+                placeholder="{{ movie.title }}"
+                required value="{{ movie.title }}"
                 class="form-control"
             >
-            <label class="form-label">Body:</label>
+            <label class="text-light form-label">Genre:</label>
             <input 
                 type="text" 
-                name="body" 
-                placeholder="{{ example.body }}" 
-                value="{{ example.body }}" 
+                name="genre" 
+                placeholder="{{ movie.genre }}" 
+                required value="{{ movie.genre }}" 
                 class="form-control"
             >
-            <label class="form-label">Amount:</label>
+            <label class="text-light form-label">Director:</label>
+            <input 
+                type="text" 
+                name="director"
+                required value="{{ movie.director }}"
+                class="form-control"
+            >
+            <label class="text-light form-label">Release Date:</label>
             <input 
                 type="number" 
-                name="amount"
-                value="{{ example.amount }}"
+                name="date"
+                required value="{{ movie.date }}"
                 class="form-control"
             >
-            <label class="form-label">Ready:</label>
+            <label class="text-light form-label">Favorite:</label>
             <input 
                 type="checkbox" 
                 name="ready" 
                 class="form-check-input"
-                {% if example.ready %}
+                {% if movie.favorite %}
                     checked
                 {% endif %}
             >
         </fieldset>
-        <input type="submit" value="Edit Example" class="btn btn-success">
+        <input type="submit" value="Edit Movie" class="btn btn-outline-warning">
     </form>
 </div>
 {% endblock %}
