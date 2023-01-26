@@ -4,6 +4,12 @@
         <div class="row justify-content-between">
             <article class="col-5">
                 <h2 class="text-light py-2">{{movie.title}}</h2>
+                <h6 class="text-warning">
+                    {% if movie.favorite %}
+                        Favorited
+                    {% else %}
+                    {%endif%}
+                </h6>
                 <h6 class="text-light">Genre: 
                     <p class="text-light-emphasis py-1">{{movie.genre}}</p>
                 </h6>
@@ -16,12 +22,6 @@
                 <h6 class="text-light"> 
                     Movie Info: <br>
                     <p class="text-light-emphasis py-2">{{movie.description}}</p>
-                </h6>
-                <h6 class="text-warning">
-                    {% if movie.favorite %}
-                        Favorited
-                    {% else %}
-                    {%endif%}
                 </h6>
                 {% if movie.owner == userId %}
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

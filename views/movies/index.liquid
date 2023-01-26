@@ -11,14 +11,14 @@
                     Genre: {{ movie.genre }}
                 </p>
                 <p class="card-text">
-                    <span class="d-inline-block text-truncate">Director: {{ movie.director }}</span>
+                    <span class="d-inline-block text-truncate" style="max-width: 230px;">Director: {{ movie.director }}</span>
                 </p>
                 <p class="card-text">
-                    <span class="d-inline-block text-truncate">Date: {{ movie.date }}</span>
+                    <span class="d-inline-block text-truncate" style="max-width: 190px;">Date: {{ movie.date }}</span>
                 </p>
                 <h7 class="card-text">
                     {% if movie.favorite == userId %}
-                        <span class="text-warning bg-dark" style="max-width: 18rem;">* Favorited *</span>
+                        <span class="text-warning bg-dark" style="max-width: 190px;">* Favorited *</span>
                     {% else %}
                     {%endif%} <br></br>
                 </h7>
