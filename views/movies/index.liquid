@@ -5,10 +5,10 @@
     <div class="row">
         {% for movie in movies %}
         <div class="card text-bg-dark me-3 mb-3" style="width: 18rem;">
-            <h5 class="card-header">{{ movie.title }}</h5>
+            <h5 class="card-header d-inline-block text-truncate" style="max-width: 250px;">{{ movie.title }}</h5>
             <div class="card-body mb-3">
                 <p class="card-text">
-                    Genre: {{ movie.genre }}
+                    <span class="d-inline-block text-truncate" style="max-width: 230px;">Genre: {{ movie.genre }}</span>
                 </p>
                 <p class="card-text">
                     <span class="d-inline-block text-truncate" style="max-width: 230px;">Director: {{ movie.director }}</span>

@@ -14,6 +14,7 @@ const movieSchema = new Schema(
 		genre: { type: String, required: true },
         director: { type: String, required: true },
 		date: { type: Number, required: true },
+		cast: { type: String, required: true },
 		description: { type: String, required: true },
 		owner: {
 			type: Schema.Types.ObjectID,
