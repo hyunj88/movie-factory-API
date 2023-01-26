@@ -1,6 +1,5 @@
 // import dependencies
 const mongoose = require('./connection')
-const commentSchema = require('./comment')
 
 // import user model for populate
 const User = require('./user')
@@ -8,7 +7,7 @@ const User = require('./user')
 // destructure the schema and model constructors from mongoose
 const { Schema, model } = mongoose
 
-const movieSchema = new Schema(
+const favoriteSchema = new Schema(
 	{
 		title: { type: String, required: true },
 		genre: { type: String, required: true },
@@ -19,13 +18,12 @@ const movieSchema = new Schema(
 			type: Schema.Types.ObjectID,
 			ref: 'User',
 		},
-		comments: [commentSchema]
 	},
 	{ timestamps: true }
 )
 
-const Movie = model('Movie', movieSchema)
+const Favorite = model('Favorite', favoriteSchema)
 
 
 // Export our Model
-module.exports = Movie
+module.exports = Favorite

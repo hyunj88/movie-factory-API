@@ -6,6 +6,7 @@ const express = require("express")
 const middleware = require('./utils/middleware')
 const MovieRouter = require('./controllers/movieControllers')
 const CommentRouter = require('./controllers/commentControllers')
+const FavoriteRouter = require('./controllers/favoriteControllers')
 const UserRouter = require('./controllers/userControllers')
 const User = require("./models/user")
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
@@ -24,6 +25,7 @@ middleware(app)
 
 app.use('/movies', MovieRouter)
 app.use('/comments', CommentRouter)
+app.use('/favorites', FavoriteRouter)
 app.use('/auth', UserRouter)
 
 app.get('/', (req, res) => {

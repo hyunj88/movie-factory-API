@@ -6,7 +6,7 @@
                 <small class="text-light-emphasis">commentator: {{ comm.commentator.username }}</small>
                 {% if comm.commentator == userId %}
                     <form action="/comments/delete/{{ movie.id }}/{{ comm.id }}?_method=DELETE" method="POST">
-                        <input class="btn btn-outline-warning" type="submit" value="X">
+                        <input class="btn btn-outline-secondary" type="submit" value="X">
                     </form>
                 {% endif %}
             </div>
