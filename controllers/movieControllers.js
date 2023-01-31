@@ -103,7 +103,7 @@ router.get('/mine', (req, res) => {
         .populate('comments.commentator', '-password')
 		.then(movies => {
 			// res.status(200).json({ movies: movies })
-			res.render('movies/index', { movies, ...req.session })
+			res.render('movies/mine', { movies, ...req.session })
 		})
 		.catch(error => {
 			// res.status(400).json(err)
@@ -116,10 +116,10 @@ router.get('/new', (req, res) => {
 	res.render('movies/new', { ...req.session })
 })
 
+
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
 	req.body.owner = req.session.userId
-	req.body.favorite = req.body.favorite === 'on' ? true : false
 	Movie.create(req.body)
 		.then(movie => {
 			res.redirect(`/movies/${movie.id}`)

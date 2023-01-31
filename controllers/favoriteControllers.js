@@ -5,32 +5,28 @@ const Favorite = require('../models/favorite')
 // Create router
 const router = express.Router()
 
-// GET route
-router.get('/', (req, res) => {
+// GET - favorite movie index
+router.get('/', (req,res)=> {
     Favorite.find({ owner: req.session.userId })
-		.populate('owner', 'username')
-		.then(movies => {
-			// res.status(200).json({ movies: movies })
-			res.render('movies/index', { movies, ...req.session })
-		})
-		.catch(error => {
-			res.redirect(`/error?error=${error}`)
-		})
+    .populate('owner', 'username')
+    .populate('movie', 'movieId')
+        .then(favorite => {
+            res.render('movies/favorite.liquid', { favorite, ...req.session })
+        })
+        .catch(err=> console.log(err))
 })
 
-// POST route
-router.post('movie/:id/favorite', async (req, res) => {
-    const id = req.params.id
-	Movie.findById(id)
-		.populate('favorites.owner', 'username')
-        .populate('comments.commentator', 'username')
-		.then(movie => {
-			// res.json({ movie: movie })
-			res.render('favorites/show.liquid', {movie, ...req.session})
+// POST
+router.post('/', (req, res) => {
+	req.body.owner = req.session.userId
+    const movieId = req.params.id
+	Favorite.create({ movie: movieId, owner: req.session.userId })
+    .populate('owner', 'username')
+    .populate('movie', 'movieId')
+		.then(() => {
+			res.redirect('/favorites')
 		})
-		.catch((error) => {
-			// console.log(err)
-            // res.status(404).json(err)
+		.catch(error => {
 			res.redirect(`/error?error=${error}`)
 		})
 })

@@ -3,10 +3,10 @@
         <div class="card-body">
             <p>{{ comm.note }}</p>
             <div class="d-flex justify-content-between">
-                <small class="text-light-emphasis">commentator: {{ comm.commentator.username }}</small>
+                <small class="text-light-emphasis">{{ comm.commentator.username }}</small>
                 {% if comm.commentator == userId %}
                     <form action="/comments/delete/{{ movie.id }}/{{ comm.id }}?_method=DELETE" method="POST">
-                        <input class="btn btn-outline-secondary" type="submit" value="X">
+                        <input class="btn btn-outline-secondary btn-sm" type="submit" value="X">
                     </form>
                 {% endif %}
             </div>

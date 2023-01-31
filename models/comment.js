@@ -1,5 +1,5 @@
 // schema for comment subdocument
-const mongoose = require('./connection')
+const mongoose = require('../utils/connection')
 
 
 const { Schema } = mongoose

@@ -1,0 +1,30 @@
+{% layout 'layout.liquid'%}
+{% block content %}
+<div class="container-md">
+    <h2 class="display-6 text-warning">My Uploaded Movies</h2>
+    <div class="row">
+        {% for movie in movies %}
+        <div class="card text-bg-dark me-3 mb-3" style="width: 18rem;">
+            <h5 class="card-header d-inline-block text-truncate" style="max-width: 250px;">{{ movie.title }}</h5>
+            <div class="card-body mb-3">
+                <p class="card-text">
+                    <span class="d-inline-block text-truncate" style="max-width: 230px;">Genre: {{ movie.genre }}</span>
+                </p>
+                <p class="card-text">
+                    <span class="d-inline-block text-truncate" style="max-width: 230px;">Director: {{ movie.director }}</span>
+                </p>
+                <p class="card-text">
+                    <span class="d-inline-block text-truncate" style="max-width: 190px;">Date: {{ movie.date }}</span>
+                </p>
+                </h7>
+                <div class="card-footer">
+                    <a href="/movies/{{ movie.id }}" class="btn btn-warning">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

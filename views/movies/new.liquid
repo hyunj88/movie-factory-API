@@ -3,50 +3,54 @@
 <div class="container-sm">
     <form action="/movies" method="POST">
         <fieldset>
-            <legend class="text-warning">Add Movie</legend>
-            <label class="text-light form-label">Title: </label>
-            <input 
-                type="text" 
-                name="title" 
-                placeholder="enter movie title"
-                class="form-control"
-            >
-            <label class="text-light form-label">Release Date:</label>
-            <input 
-                type="number" 
-                name="date" 
-                placeholder="enter year the movie was released"
-                class="form-control"
-            >
-            <label class="text-light form-label">Genre:</label>
-            <input 
-                type="text" 
-                name="genre" 
-                placeholder="enter movie genre" 
-                class="form-control"
-            >
-            <label class="text-light form-label">Director:</label>
-            <input 
-                type="text" 
-                name="director" 
-                placeholder="enter movie director"
-                class="form-control"
-            >
-            <label class="text-light form-label">Cast:</label>
-            <input 
-                type="text" 
-                name="cast" 
-                placeholder="enter movie cast members"
-                class="form-control"
-            >
-            <label class="text-light form-label">Synopis:</label>
-            
-            <input 
-                type="text" 
-                name="description" 
-                placeholder="enter a brief summary of the movie..."
-                class="form-control"
-            >
+            <div class="col-4">
+                <legend class="text-warning">Add Movie</legend>
+                <label class="text-light form-label">Title: </label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    placeholder="enter movie title"
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Release Date:</label>
+                <input 
+                    type="number" 
+                    name="date" 
+                    placeholder="enter year the movie was released"
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Genre:</label>
+                <input 
+                    type="text" 
+                    name="genre" 
+                    placeholder="enter movie genre" 
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Director:</label>
+                <input
+                    type="text" 
+                    name="director" 
+                    placeholder="enter movie director"
+                    class="form-control"
+                    rows="3"
+                >
+                <label class="text-light form-label pt-3">Cast:</label>
+                <input 
+                    type="text" 
+                    name="cast" 
+                    placeholder="enter movie cast members"
+                    class="form-control"
+                >
+            </div>
+            <div>
+                <label for="exampleFormControlTextarea1" class="text-light form-label pt-3">Synopis:</label>
+                <input 
+                    type="text" 
+                    name="description" 
+                    placeholder="enter a brief summary of the movie..."
+                    class="form-control"
+                >
+            </div>
         </fieldset>
         <div class="class pt-3"></div>
         <input type="submit" value="Add New Movie" class="btn btn-outline-warning">

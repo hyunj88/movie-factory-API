@@ -12,14 +12,14 @@
                 required value="{{ movie.title }}"
                 class="form-control"
             >
-            <label class="text-light form-label">Release Date:</label>
+            <label class="text-light form-label pt-3">Release Date:</label>
             <input 
                 type="number" 
                 name="date"
                 required value="{{ movie.date }}"
                 class="form-control"
             >
-            <label class="text-light form-label">Genre:</label>
+            <label class="text-light form-label pt-3">Genre:</label>
             <input 
                 type="text" 
                 name="genre" 
@@ -27,21 +27,21 @@
                 required value="{{ movie.genre }}" 
                 class="form-control"
             >
-            <label class="text-light form-label">Director:</label>
+            <label class="text-light form-label pt-3">Director:</label>
             <input 
                 type="text" 
                 name="director"
                 required value="{{ movie.director }}"
                 class="form-control"
             >
-            <label class="text-light form-label">Cast:</label>
+            <label class="text-light form-label pt-3">Cast:</label>
             <input 
                 type="text" 
                 name="cast"
                 required value="{{ movie.cast }}"
                 class="form-control"
             >
-            <label class="text-light form-label">Synopsis:</label>
+            <label class="text-light form-label pt-3">Synopsis:</label>
             <input 
                 type="text" 
                 name="description"
@@ -49,8 +49,10 @@
                 class="form-control"
             >
         </fieldset>
-        <input type="submit" value="Edit Movie" class="btn btn-outline-warning" value="Edit {{movie.name}}">
-        <a href="/movies/{{ movie.id }}" class="btn btn-outline-warning">Back</a>
+        <div class="class pt-3">
+            <input type="submit" value="Edit Movie" class="btn btn-outline-warning" value="Edit {{movie.name}}">
+            <a href="/movies/{{ movie.id }}" class="btn btn-outline-warning">Back</a>
+        </div>
     </form>
 </div>
 {% endblock %}

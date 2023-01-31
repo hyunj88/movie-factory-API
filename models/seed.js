@@ -1,5 +1,5 @@
 // import dependencies
-const mongoose = require('./connection')
+const mongoose = require('../utils/connection')
 const Movie = require('./movie')
 
 // Seed Script code
