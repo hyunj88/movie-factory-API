@@ -3,7 +3,10 @@
 <div class="container-md">
     <h2 class="display-6 text-warning">Favorite Movies</h2>
     <div class="row">
-        {% for movie in movies %}
+        {%if favorites.length <= 0%}
+         <h3>you have no favorites</h3>
+        {%else%}
+        {% for favorite in favorites %}
         <div class="card text-bg-dark me-3 mb-3" style="width: 18rem;">
             <h5 class="card-header d-inline-block text-truncate" style="max-width: 250px;">{{ movie.title }}</h5>
             <div class="card-body mb-3">
@@ -16,12 +19,6 @@
                 <p class="card-text">
                     <span class="d-inline-block text-truncate" style="max-width: 190px;">Date: {{ movie.date }}</span>
                 </p>
-                <h7 class="card-text">
-                    {% if movie.favorite == userId %}
-                        <span class="text-warning bg-dark" style="max-width: 190px;">* Favorited *</span>
-                    {% else %}
-                    {%endif%} <br></br>
-                </h7>
                 <div class="card-footer">
                     <a href="/movies/{{ movie.id }}" class="btn btn-warning">
                         View
@@ -30,6 +27,7 @@
             </div>
         </div>
         {% endfor %}
+        {%endif%}
     </div>
 </div>
 {% endblock %}

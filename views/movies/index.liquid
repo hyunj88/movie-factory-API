@@ -16,12 +16,6 @@
                 <p class="card-text">
                     <span class="d-inline-block text-truncate" style="max-width: 190px;">Date: {{ movie.date }}</span>
                 </p>
-                <h7 class="card-text">
-                    {% if movie.favorite == userId %}
-                        <span class="text-warning bg-dark" style="max-width: 190px;">* Favorited *</span>
-                    {% else %}
-                    {%endif%} <br></br>
-                </h7>
                 <div class="card-footer">
                     <a href="/movies/{{ movie.id }}" class="btn btn-warning">
                         View

@@ -5,12 +5,9 @@
             <article class="col-5">
                 <h2 class="text-light py-2">{{movie.title}}</h2>
                 <fieldset>
-                    <form action="/favorites/:id" method="POST">
-                        <input
-                        type="submit"
-                        name="movie"
-                        class="btn btn-outline-warning"
-                        value="Add to favorite {{ movie.name }}">
+                    <form action="/favorites" method="POST">
+                        <input type="hidden" name="movie" value="{{ movie.id }}">
+                        <button type="submit" class="btn btn-outline-warning" >Add to Favorites</button>
                     </form>
                 </fieldset>
                 </h6>

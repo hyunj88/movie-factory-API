@@ -10,15 +10,15 @@ const commentSchema = require('./comment')
 const { Schema, model } = mongoose
 
 const favoriteSchema = new Schema({
-		movie: { 
-            type: Schema.Types.ObjectID,
-            ref: 'Movie'
-        },
-		owner: {
-			type: Schema.Types.ObjectID,
-			ref: 'User'
-	    },
-        comments: [commentSchema]
+	movie: { 
+		type: Schema.Types.ObjectID,
+		ref: 'Movie'
+	},
+	owner: {
+		type: Schema.Types.ObjectID,
+		ref: 'User'
+	},
+	comments: [commentSchema]	
 })
 
 const Favorite = model('Favorite', favoriteSchema)
@@ -26,3 +26,26 @@ const Favorite = model('Favorite', favoriteSchema)
 
 // Export our Model
 module.exports = Favorite
+
+
+// movieId: { 
+// 	type: String
+// },
+// owner: { 
+// 	type: String
+// },
+// genre: { 
+// 	type: String
+// },
+// director: { 
+// 	type: String
+// },
+// date: { 
+// 	type: Number
+// },
+// cast: { 
+// 	type: String
+// },
+// description: { 
+// 	type: String
+// }

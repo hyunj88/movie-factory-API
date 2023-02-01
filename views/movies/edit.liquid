@@ -3,44 +3,46 @@
 <div class="container-sm">
     <form action="/movies/{{movie.id}}?_method=PUT" method="POST">
         <fieldset>
-            <legend class="text-warning">Edit Movie</legend>
-            <label class="text-light form-label">Title: </label>
-            <input 
-                type="text" 
-                name="title" 
-                placeholder="{{ movie.title }}"
-                required value="{{ movie.title }}"
-                class="form-control"
-            >
-            <label class="text-light form-label pt-3">Release Date:</label>
-            <input 
-                type="number" 
-                name="date"
-                required value="{{ movie.date }}"
-                class="form-control"
-            >
-            <label class="text-light form-label pt-3">Genre:</label>
-            <input 
-                type="text" 
-                name="genre" 
-                placeholder="{{ movie.genre }}" 
-                required value="{{ movie.genre }}" 
-                class="form-control"
-            >
-            <label class="text-light form-label pt-3">Director:</label>
-            <input 
-                type="text" 
-                name="director"
-                required value="{{ movie.director }}"
-                class="form-control"
-            >
-            <label class="text-light form-label pt-3">Cast:</label>
-            <input 
-                type="text" 
-                name="cast"
-                required value="{{ movie.cast }}"
-                class="form-control"
-            >
+            <div class="col-4">
+                <legend class="text-warning">Edit Movie</legend>
+                <label class="text-light form-label">Title: </label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    placeholder="{{ movie.title }}"
+                    required value="{{ movie.title }}"
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Release Date:</label>
+                <input 
+                    type="number" 
+                    name="date"
+                    required value="{{ movie.date }}"
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Genre:</label>
+                <input 
+                    type="text" 
+                    name="genre" 
+                    placeholder="{{ movie.genre }}" 
+                    required value="{{ movie.genre }}" 
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Director:</label>
+                <input 
+                    type="text" 
+                    name="director"
+                    required value="{{ movie.director }}"
+                    class="form-control"
+                >
+                <label class="text-light form-label pt-3">Cast:</label>
+                <input 
+                    type="text" 
+                    name="cast"
+                    required value="{{ movie.cast }}"
+                    class="form-control"
+                >
+            </div>
             <label class="text-light form-label pt-3">Synopsis:</label>
             <input 
                 type="text" 
