@@ -97,7 +97,6 @@ router.get('/', (req, res) => {
 
 // index that shows only the user's movies
 router.get('/mine', (req, res) => {
-    // find movies by ownership, using the req.session info
     Movie.find({ owner: req.session.userId })
 		.populate('owner', 'username')
         .populate('comments.commentator', '-password')
